@@ -4,12 +4,14 @@ const canv = document.querySelector(".canv");
 const body = document.body;
 var color = "black";
 var rainbow = false;
+var dimension = 20;
 
 var display = document.getElementById("display");
 var slider = document.getElementById("input").oninput = function(){
     var value = (this.value - this.min)/(this.max-this.min)*100;
     display.innerText = this.value;
     document.querySelector(".canv").innerHTML = "<div></div>"
+    dimension = this.value;
     canvas(this.value)
 }
 
@@ -54,13 +56,13 @@ Array.from(pixels).forEach((pixel)=>{
 
 function reset(){
     document.querySelector(".canv").innerHTML = "<div></div>"
-    canvas(20);
-    slider.value = 0;
-    display.innerText = 20;
+    canvas(dimension);
+    display.innerText = dimension;
     color = 'black'
+    rainbow = false;
     // const pixels = document.querySelectorAll('.element');
     // Array.from(pixels).forEach((pixel)=>{
-    //     pixel.style.backgroundColor = 'aliceblue';
+    //     pixel.style.backgroundColor = '#ACFADFblue';
     // })
 }
 
@@ -70,7 +72,9 @@ document.querySelector(".reset").addEventListener('click',
 )
 
 document.querySelector(".erase").addEventListener('click',
-    ()=>{color = 'aliceblue'}
+    ()=>{(color === '#ACFADF'? color = 'black' : color = '#ACFADF');
+rainbow = false
+}
 )
 
 document.querySelector(".rainbow").addEventListener('click',()=>{
