@@ -1,7 +1,9 @@
+var colors = ["violet",  "indigo" , "blue", "green", "yellow", "orange", "red" ]
 var clickState = false;
 const canv = document.querySelector(".canv");
 const body = document.body;
 var color = "black";
+var rainbow = false;
 
 var display = document.getElementById("display");
 var slider = document.getElementById("input").oninput = function(){
@@ -38,7 +40,14 @@ canv.addEventListener("mousedown" , ()=>{
 Array.from(pixels).forEach((pixel)=>{
     pixel.addEventListener("mouseover", ()=>{
         if(clickState){
-        pixel.style.backgroundColor = color;}
+            if(rainbow){
+                var randomColor = colors[Math.floor(Math.random()*7)]
+        pixel.style.backgroundColor = randomColor;
+            }
+            else{
+                pixel.style.backgroundColor = color;
+            }
+            }
     })
 })
 }
@@ -64,4 +73,6 @@ document.querySelector(".erase").addEventListener('click',
     ()=>{color = 'aliceblue'}
 )
 
-
+document.querySelector(".rainbow").addEventListener('click',()=>{
+    rainbow = !rainbow;
+})
